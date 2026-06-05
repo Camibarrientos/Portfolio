@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camila Barrientos | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --em:   #00B87A;   /* emerald */
+      --vi:   #8B6BAE;   /* violet  */
+      --li:   #C4B0E0;   /* lilac   */
+      --ink:  #0F0F0F;
+      --paper:#F5F3EF;
+      --white:#FFFFFF;
+      --muted:#6B6B6B;
+      --border:#1A1A1A;
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4vw;
+      height: 60px;
+      border-bottom: 2px solid var(--em);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--white);
+      letter-spacing: 0.03em;
+    }
+    .nav-logo span { color: var(--em); }
+    .nav-links {
+      display: flex; gap: 1.6rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color .2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--em); }
+    .nav-cta {
+      background: var(--em); color: var(--ink);
+      font-weight: 700; font-size: 0.78rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.5rem 1.2rem; border-radius: 0;
+      border: 2px solid var(--em);
+      transition: background .2s, color .2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .nav-cta:hover { background: transparent; color: var(--em); }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0; z-index: 199;
+      background: var(--ink);
+      flex-direction: column;
+      padding: 1.5rem 4vw 2rem;
+      border-bottom: 2px solid var(--em);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem; font-weight: 600;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: color .2s;
+    }
+    .mobile-nav a:hover { color: var(--em); }
+    .mobile-nav .nav-cta {
+      margin-top: 1rem; text-align: center;
+      display: block; padding: 0.8rem;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 4vw 0;
+      gap: 0;
+      overflow: hidden;
+    }
+    .hero-left {
+      padding: 4rem 0;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--em);
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 32px; height: 2px;
+      background: var(--em);
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--em);
+    }
+    .hero-bio {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem; line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-solid {
+      background: var(--em); color: var(--ink);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 2px solid var(--em);
+      transition: background .2s, color .2s;
+      cursor: pointer; display: inline-block;
+    }
+    .btn-solid:hover { background: transparent; color: var(--em); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.88rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 2px solid rgba(255,255,255,0.25);
+      transition: border-color .2s;
+      cursor: pointer; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--white); }
+
+    /* hero right — color block */
+    .hero-right {
+      background: var(--vi);
+      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 60px 0 0;
+    }
+    .hero-right-mono { display: none; }
+    .hero-spec-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      width: 100%;
+      align-self: stretch;
+    }
+    .hero-spec-item {
+      background: rgba(0,0,0,0.18);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .hero-spec-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--em);
+      letter-spacing: 0.1em;
+    }
+    .hero-spec-name {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 6rem 4vw; }
+    .container { max-width: 1120px; margin: 0 auto; }
+
+    .s-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--em);
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .s-label::before { content: ''; display: block; width: 28px; height: 2px; background: var(--em); }
+
+    .s-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .s-desc {
+      color: var(--muted);
+      font-size: 1rem; line-height: 1.8;
+      max-width: 520px;
+    }
+    .s-header { margin-bottom: 3.5rem; }
+
+    /* ─── SOBRE MÍ ─── */
+    #sobre { background: var(--white); }
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .sobre-text p {
+      color: var(--muted); line-height: 1.85; font-size: 0.97rem;
+      margin-bottom: 1rem;
+    }
+    .sobre-text strong { color: var(--ink); }
+    .sobre-text .btn-solid { margin-top: 1rem; }
+
+    .sobre-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--ink);
+      border: 2px solid var(--ink);
+    }
+    .stat-box {
+      background: var(--paper);
+      padding: 2rem 1.5rem;
+      transition: background .25s;
+    }
+    .stat-box:hover { background: var(--em); }
+    .stat-box:hover .stat-n,
+    .stat-box:hover .stat-l { color: var(--ink); }
+    .stat-n {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem; font-weight: 800;
+      color: var(--vi);
+      line-height: 1;
+    }
+    .stat-l {
+      font-size: 0.82rem; color: var(--muted);
+      margin-top: 0.4rem; line-height: 1.4;
+    }
+
+    /* ─── SERVICIOS ─── */
+    #servicios { background: var(--ink); }
+    #servicios .s-title { color: var(--white); }
+    #servicios .s-label { color: var(--em); }
+    #servicios .s-desc { color: rgba(255,255,255,0.45); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .svc-card {
+      background: #0F0F0F;
+      padding: 2rem 1.8rem;
+      transition: background .25s;
+      cursor: default;
+    }
+    .svc-card:hover { background: var(--vi); }
+    .svc-card:hover .svc-num,
+    .svc-card:hover .svc-title,
+    .svc-card:hover .svc-desc { color: var(--white); }
+    .svc-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--em); letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .svc-icon { margin-bottom: 0.8rem; color: var(--em); width: 28px; height: 28px; }
+    .svc-icon svg { width: 28px; height: 28px; }
+    .svc-card:hover .svc-icon { color: var(--white); }
+    .svc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .svc-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
+
+    /* ─── EXPERIENCIA ─── */
+    #experiencia { background: var(--paper); }
+
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-top: 1.5px solid var(--ink);
+      padding: 2.5rem 0;
+      gap: 3rem;
+      transition: background .2s;
+    }
+    .exp-item:last-child { border-bottom: 1.5px solid var(--ink); }
+    .exp-item:hover { background: var(--em); }
+    .exp-item:hover .exp-co,
+    .exp-item:hover .exp-role,
+    .exp-item:hover .exp-desc,
+    .exp-item:hover .exp-period { color: var(--ink); }
+
+    .exp-meta { padding-left: 0; }
+    .exp-period {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .exp-co {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--vi);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--ink); line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+    .exp-desc {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.75;
+    }
+    .exp-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .exp-tag {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      background: var(--ink); color: var(--white);
+    }
+    .exp-item:hover .exp-tag { background: rgba(0,0,0,0.2); color: var(--ink); }
+
+    /* ─── MODALIDADES ─── */
+    #modalidades { background: var(--vi); padding-top: 5rem; padding-bottom: 5rem; }
+    #modalidades .s-title { color: var(--white); }
+    #modalidades .s-label { color: var(--li); }
+    #modalidades .s-desc { color: rgba(255,255,255,0.6); }
+
+    .modos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .modo-card {
+      background: var(--vi);
+      padding: 2.2rem 1.8rem;
+      transition: background .2s;
+    }
+    .modo-card:hover { background: var(--em); }
+    .modo-card:hover .modo-n,
+    .modo-card:hover .modo-title,
+    .modo-card:hover .modo-desc { color: var(--ink); }
+    .modo-n {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      color: rgba(255,255,255,0.2); line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .modo-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .modo-desc { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+    /* ─── SKILLS ─── */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 5rem;
+    }
+    .skill-row {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .skill-row:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+    .skill-head {
+      display: flex; justify-content: space-between;
+      align-items: baseline; margin-bottom: 0.7rem;
+    }
+    .skill-name { font-size: 0.9rem; font-weight: 600; }
+    .skill-pct {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem; font-weight: 700; color: var(--vi);
+    }
+    .skill-track {
+      height: 4px; background: rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: var(--em);
+      animation: growBar 1.4s cubic-bezier(.16,1,.3,1) forwards;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+    @keyframes growBar { to { transform: scaleX(1); } }
+
+    /* ─── CONTACTO ─── */
+    #contacto { background: var(--ink); }
+    #contacto .s-title { color: var(--white); }
+    #contacto .s-label { color: var(--em); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-left p {
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem; line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-items { display: flex; flex-direction: column; gap: 0; }
+    .c-item {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .c-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+    .c-icon {
+      width: 44px; height: 44px;
+      background: var(--vi);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+    .c-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.2rem; }
+    .c-val { font-size: 0.95rem; font-weight: 500; color: var(--white); }
+    .c-val a { color: var(--white); transition: color .2s; }
+    .c-val a:hover { color: var(--em); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--em);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      padding: 1.4rem 4vw;
+    }
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      color: var(--ink);
+    }
+    .footer-copy { font-size: 0.8rem; color: rgba(0,0,0,0.55); }
+
+    /* ─── RESPONSIVE ─── */
+
+    /* Tablet (≤ 1024px) */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 60px;
+      }
+      .hero-left { padding: 3rem 0 2rem; }
+      .hero-right {
+        min-height: auto;
+        height: auto;
+        padding: 0;
+        align-items: stretch;
+      }
+      .hero-spec-list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .modos-grid { grid-template-columns: repeat(2, 1fr); }
+      .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    /* Tablet chico / Mobile (≤ 860px) */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* Mobile (≤ 640px) */
+    @media (max-width: 640px) {
+      section { padding: 3.5rem 1.25rem; }
+
+      .hero { padding: 60px 1.25rem 0; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero-right { padding: 0; }
+      .hero-spec-list { grid-template-columns: repeat(2, 1fr); }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .modos-grid { grid-template-columns: 1fr; }
+
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .exp-meta { padding-bottom: 0.5rem; }
+
+      .sobre-stats { grid-template-columns: 1fr 1fr; }
+
+      .hero-actions { flex-direction: column; }
+      .btn-solid, .btn-ghost { text-align: center; }
+
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">Camila <span>Barrientos</span></div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre mí</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Contacto</a>
+  <button class="hamburger" id="ham" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile drawer -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#sobre"       onclick="closeNav()">Sobre mí</a>
+  <a href="#servicios"   onclick="closeNav()">Servicios</a>
+  <a href="#experiencia" onclick="closeNav()">Experiencia</a>
+  <a href="#skills"      onclick="closeNav()">Skills</a>
+  <a href="#contacto"    class="nav-cta" onclick="closeNav()">Contacto</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Marketing &amp; Contenido</div>
+    <h1>Camila<br><em>Barrientos</em></h1>
+    <p class="hero-bio">
+      Estudiante de Gestión de Medios y Entretenimiento (UADE) con experiencia real en
+      marketing digital, community management, producción de eventos y desarrollo de contenido.
+      Ayudo a marcas y emprendimientos a mejorar su presencia y resultados.
+    </p>
+    <div class="hero-actions">
+      <a href="#servicios" class="btn-solid">Ver servicios</a>
+      <a href="#contacto"  class="btn-ghost">Hablemos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-spec-list">
+      <div class="hero-spec-item"><span class="hero-spec-num">01</span><span class="hero-spec-name">Community Management</span></div>
+      <div class="hero-spec-item"><span class="hero-spec-num">02</span><span class="hero-spec-name">Diseño de Contenido</span></div>
+      <div class="hero-spec-item"><span class="hero-spec-num">03</span><span class="hero-spec-name">Edición de Video</span></div>
+      <div class="hero-spec-item"><span class="hero-spec-num">04</span><span class="hero-spec-name">Producción de Eventos</span></div>
+      <div class="hero-spec-item"><span class="hero-spec-num">05</span><span class="hero-spec-name">Estrategia de Contenidos</span></div>
+      <div class="hero-spec-item"><span class="hero-spec-num">06</span><span class="hero-spec-name">WordPress</span></div>
+    </div>
+    <div class="hero-right-mono">CB</div>
+  </div>
+</section>
+
+<!-- ── SOBRE MÍ ── -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p class="s-label">¿Quién soy?</p>
+        <h2 class="s-title">Contenido que<br>convierte.</h2>
+        <p>
+          Soy <strong>Camila Barrientos</strong>, estudiante de Gestión de Medios y Entretenimiento en
+          <strong>UADE</strong>. Trabajo en la intersección del marketing digital, la producción de contenido
+          y la coordinación de proyectos y eventos.
+        </p>
+        <p>
+          Mi enfoque es práctico y orientado a resultados: gestiono redes, edito videos, coordino
+          eventos y ayudo a marcas a organizarse mejor.
+        </p>
+        <a href="#contacto" class="btn-solid">¡Trabajemos juntos!</a>
+      </div>
+      <div class="sobre-stats">
+        <a href="#servicios" class="stat-box" style="text-decoration:none; display:block; cursor:pointer;">
+          <div class="stat-n">9+</div>
+          <div class="stat-l">Servicios ofrecidos</div>
+        </a>
+        <div class="stat-box">
+          <div class="stat-n">3</div>
+          <div class="stat-l">Plataformas (IG, TikTok, FB)</div>
+        </div>
+        <a href="#modalidades" class="stat-box" style="text-decoration:none; display:block; cursor:pointer;">
+          <div class="stat-n">4</div>
+          <div class="stat-l">Modalidades de trabajo</div>
+        </a>
+        <div class="stat-box">
+          <div class="stat-n">100%</div>
+          <div class="stat-l">Compromiso con cada proyecto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICIOS ── -->
+<section id="servicios">
+  <div class="container">
+    <div class="s-header">
+      <p class="s-label">¿Qué hago?</p>
+      <h2 class="s-title" style="color:var(--white);">Servicios</h2>
+      <p class="s-desc">Todo lo que tu marca necesita para crecer en digital y en cada evento.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="svc-title">Community Management</div>
+        <div class="svc-desc">Gestión profesional de redes sociales, construcción de comunidad y presencia de marca constante.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        <div class="svc-title">Diseño de Contenido</div>
+        <div class="svc-desc">Piezas visuales y textuales para Instagram, TikTok y Facebook adaptadas a cada audiencia.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="svc-title">Edición de Video</div>
+        <div class="svc-desc">Reels, Shorts y TikToks con tendencia, storytelling y potencial de viralización.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="svc-title">Cobertura de Eventos</div>
+        <div class="svc-desc">Cobertura fotográfica y audiovisual de eventos, espectáculos y activaciones de marca en vivo.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="svc-title">Coordinación de Proyectos</div>
+        <div class="svc-desc">Organización y seguimiento de proyectos, gestión de clientes y proveedores con foco en resultados.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">06</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <div class="svc-title">Merchandising Promocional</div>
+        <div class="svc-desc">Desarrollo de productos promocionales, búsqueda y negociación con proveedores.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">07</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="svc-title">Gestión WordPress</div>
+        <div class="svc-desc">Mantenimiento y actualización de sitios web para mantener tu presencia online activa.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">08</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="svc-title">Estrategia de Contenidos</div>
+        <div class="svc-desc">Planificación editorial y calendario de contenidos alineado a los objetivos de tu marca.</div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">09</div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="svc-title">Búsqueda de Proveedores</div>
+        <div class="svc-desc">Investigación, contacto y negociación con proveedores para optimizar costos y tiempos.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCIA ── -->
+<section id="experiencia">
+  <div class="container">
+    <div class="s-header">
+      <p class="s-label">Trayectoria</p>
+      <h2 class="s-title">Experiencia</h2>
+      <p class="s-desc">De dónde vengo y lo que construí en el camino.</p>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2023 – Dic. 2025</div>
+          <div class="exp-co">MissMei</div>
+        </div>
+        <div>
+          <div class="exp-role">Administración &amp; Community Management</div>
+          <div class="exp-desc">
+            Gestión integral de redes sociales y comunidades digitales. Administración de canales,
+            atención a clientes, creación de contenido y estrategia digital orientada a resultados comerciales.
+            Seguimiento de proyectos y coordinación con proveedores nacionales e internacionales.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Instagram</span>
+            <span class="exp-tag">Community</span>
+            <span class="exp-tag">Proveedores</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2019 – Actualidad</div>
+          <div class="exp-co">TM Eventos</div>
+        </div>
+        <div>
+          <div class="exp-role">Marketing, Contenido &amp; Producción de Eventos</div>
+          <div class="exp-desc">
+            Trabajo por proyecto en marketing, contenido y producción. Participación activa en la
+            organización, logística y cobertura de eventos masivos, espectáculos en vivo y
+            activaciones de marca. Coordinación de equipos y gestión operativa en tiempo real.
+            Generación de contenido in situ para redes sociales.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Por proyecto</span>
+            <span class="exp-tag">Producción</span>
+            <span class="exp-tag">Cobertura</span>
+            <span class="exp-tag">Activaciones</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2022 – Actualidad</div>
+          <div class="exp-co">Proyectos Freelance</div>
+        </div>
+        <div>
+          <div class="exp-role">Creación de Contenido &amp; Gestión de Campañas</div>
+          <div class="exp-desc">
+            Desarrollo de piezas de contenido para redes sociales y campañas digitales de marcas y
+            emprendimientos. Edición de video para Reels y TikTok, gestión de calendarios editoriales
+            y seguimiento de métricas de performance.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Reels</span>
+            <span class="exp-tag">TikTok</span>
+            <span class="exp-tag">Campañas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">En curso</div>
+          <div class="exp-co">UADE</div>
+        </div>
+        <div>
+          <div class="exp-role">Gestión de Medios y Entretenimiento</div>
+          <div class="exp-desc">
+            Carrera universitaria orientada a la gestión integral de medios, producción audiovisual,
+            marketing y entretenimiento. Formación teórico-práctica en comunicación estratégica,
+            producción de contenidos y gestión de proyectos culturales y digitales.
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Medios</span>
+            <span class="exp-tag">Marketing</span>
+            <span class="exp-tag">Producción</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MODALIDADES ── -->
+<section id="modalidades">
+  <div class="container">
+    <div class="s-header">
+      <p class="s-label">¿Cómo trabajo?</p>
+      <h2 class="s-title" style="color:var(--white);">Modalidades</h2>
+      <p class="s-desc">Flexible y adaptable a lo que tu proyecto necesite.</p>
+    </div>
+    <div class="modos-grid">
+      <div class="modo-card">
+        <div class="modo-n">01</div>
+        <div class="modo-title">Gestión Mensual</div>
+        <div class="modo-desc">Administración continua de redes sociales con estrategia, calendario y reportes.</div>
+      </div>
+      <div class="modo-card">
+        <div class="modo-n">02</div>
+        <div class="modo-title">Proyectos Puntuales</div>
+        <div class="modo-desc">Colaboración específica para lanzamientos, campañas o necesidades concretas.</div>
+      </div>
+      <div class="modo-card">
+        <div class="modo-n">03</div>
+        <div class="modo-title">Cobertura de Eventos</div>
+        <div class="modo-desc">Presencia en tu evento para capturar contenido en tiempo real de alto impacto.</div>
+      </div>
+      <div class="modo-card">
+        <div class="modo-n">04</div>
+        <div class="modo-title">Freelance Remoto / Presencial</div>
+        <div class="modo-desc">Para equipos que necesitan flexibilidad en la forma de trabajo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="container">
+    <div class="s-header">
+      <p class="s-label">Herramientas &amp; habilidades</p>
+      <h2 class="s-title">Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Community Management</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Edición de Video (Reels / TikTok)</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:90%; animation-delay:.1s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Diseño de Contenido Digital</span><span class="skill-pct">88%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:88%; animation-delay:.2s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Estrategia de Contenidos</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%; animation-delay:.3s"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Producción de Eventos</span><span class="skill-pct">87%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:87%; animation-delay:.1s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Gestión WordPress</span><span class="skill-pct">80%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:80%; animation-delay:.2s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Negociación con Proveedores</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:85%; animation-delay:.3s"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-head"><span class="skill-name">Gestión de Proyectos</span><span class="skill-pct">88%</span></div>
+          <div class="skill-track"><div class="skill-fill" style="width:88%; animation-delay:.4s"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p class="s-label">¿Hablamos?</p>
+        <h2 class="s-title" style="color:var(--white);">¡Trabajemos<br>juntos!</h2>
+        <p>
+          ¿Tenés un proyecto, una marca o una idea que necesita crecer en digital?
+          Estoy disponible para nuevas colaboraciones — remoto o presencial, mensual o puntual.
+        </p>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=camila.barrientos.184@gmail.com" target="_blank" class="btn-solid">¡Contactame!</a>
+      </div>
+      <div class="contact-items">
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=camila.barrientos.184@gmail.com" target="_blank">camila.barrientos.184@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Instagram</div>
+            <div class="c-val"><a href="https://instagram.com/tokkistage" target="_blank">@tokkistage</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Teléfono / WhatsApp</div>
+            <div class="c-val"><a href="https://wa.me/5491138649078" target="_blank">+54 9 11 3864-9078</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10c0 7-10 13-10 13S2 17 2 10a10 10 0 0 1 20 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Disponibilidad</div>
+            <div class="c-val">Remoto &amp; Presencial · Argentina</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Formación</div>
+            <div class="c-val">Gestión de Medios y Entretenimiento · UADE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">Camila Barrientos</div>
+  <div class="footer-copy">Marketing · Contenido · Producción · 2026</div>
+</footer>
+
+<script>
+  // Hamburger menu
+  const ham = document.getElementById('ham');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+
+  function closeNav() {
+    ham.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+
+  // Smooth scroll for ALL anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Skill bars — animate on scroll
+  const fills = document.querySelectorAll('.skill-fill');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  fills.forEach(f => {
+    f.style.animationPlayState = 'paused';
+    obs.observe(f);
+  });
+</script>
+
+</body>
+</html>
